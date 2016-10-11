@@ -1,6 +1,6 @@
 [![Build status](https://travis-ci.org/philipjkim/polymer-image-slider.svg?branch=master)](https://travis-ci.org/philipjkim/polymer-image-slider)
 
-_[Demo](#) : TODO_
+_[Demo](https://philipjkim.github.io/)_
 
 
 ##&lt;polymer-image-slider&gt;
@@ -17,5 +17,6 @@ Example:
 
 PRs are always welcomed.
 
+- API docs
 - Auto-scrolling
 - Adjustable width/height
