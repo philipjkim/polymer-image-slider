@@ -1,6 +1,6 @@
 [![Build status](https://travis-ci.org/philipjkim/polymer-image-slider.svg?branch=master)](https://travis-ci.org/philipjkim/polymer-image-slider)
 
-_[Demo](demo/index.html)_
+_[Demo](#) : TODO_
 
 
 ##&lt;polymer-image-slider&gt;
@@ -12,3 +12,10 @@ Example:
 ```html
 <image-slider images='["images/a.jpg","images/b.jpg","images/c.jpg"]'></image-slider>
 ```
+
+### TODOs
+
+PRs are always welcomed.
+
+- Auto-scrolling
+- Adjustable width/height
