@@ -18,6 +18,8 @@ Example:
 
 #### Properties
 
+| Name | Type | Description |
+| --- | --- | --- |
 | `images` | `Array`, Default: `[]` - notifies | Image source(s). If this is empty, the slider is hidden. |
 | `currentPos` | `Number`, Default: `0` - readonly | The index of images for the currently shown image |
 | `currentImg` | `String`, Default: `""` - readonly | Image source for the currently shown image |
@@ -25,6 +27,8 @@ Example:
 
 #### Methods
 
+| Name | Description |
+| --- | --- |
 | `prev()` | Change the currently shown image to `images[currentPos-1]`, or the last element of `images` when `currentPos` is `0`. |
 | `next()` | Change the currently shown image to `images[currentPos+1]`, or the first element of `images` when `currentPos` is `images.length - 1`. |
 
