@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <title>polymer-image-slider demo</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../bower_components/polymer/polymer.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../bower_components/paper-styles/color.html">
+  <link rel="import" href="../polymer-image-slider.html">
+  <style is="custom-style" include="demo-pages-shared-styles">
+    .centered:not([style-scope]):not(.style-scope) {
+      max-width: 550px;
+    }
+  </style>
+</head>
+<body unresolved>
+<div class="vertical-section-container centered">
+  <h3>paper-sliders have <code>images</code> attribute,
+    and dynamically change images by modifying the attribute value.</h3>
+  <demo-snippet>
+    <template>
+      <!--
+      Use single-quotes for `images` attribute - the value should be a valid JSON string.
+
+      <image-slider id="slider" images='["1.jpg","2.jpg"]'></image-slider>
+      -->
+      <image-slider id="slider" images='["1.jpg","2.jpg"]'></image-slider>
+      <button id="btn" onclick="changeImages();">Change Images</button>
+      <script>
+        function changeImages() {
+          document.getElementById('slider').setAttribute('images', '["3.jpg","4.jpg","5.jpg"]');
+          document.getElementById('btn').disabled = true;
+        }
+      </script>
+    </template>
+  </demo-snippet>
+</div>
+</body>
+</html>
