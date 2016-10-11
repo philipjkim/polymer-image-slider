@@ -1,4 +1,4 @@
-[![Build status](https://travis-ci.org/philipjkim/paper-slider.svg?branch=master)](https://travis-ci.org/PolymerElements/paper-slider)
+[![Build status](https://travis-ci.org/philipjkim/polymer-image-slider.svg?branch=master)](https://travis-ci.org/philipjkim/polymer-image-slider)
 
 _[Demo](demo/index.html)_
 
