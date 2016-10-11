@@ -43,10 +43,12 @@
           type: String,
           value: '',
           readonly: true
+        },
+        maxWidth: {
+          type: Number,
+          value: 0,
+          observer: '_onMaxWidthChanged'
         }
-      },
-      ready: function() {
-        this._onImagesChanged();
       },
       prev: function() {
         if (this.currentPos > 0) {
@@ -72,6 +74,13 @@
           this.currentImg = this.images[this.currentPos];
           this.hidden = false;
           this.$.controls.hidden = this.images.length == 1;
+        }
+      },
+      _onMaxWidthChanged: function() {
+        if (this.maxWidth <= 0) {
+          this.$.image.removeAttribute('style');
+        } else {
+          this.$.image.setAttribute('style', `width:100%;max-width:${this.maxWidth}px;`);
         }
       }
     });
