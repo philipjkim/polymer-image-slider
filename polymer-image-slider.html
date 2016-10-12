@@ -13,6 +13,69 @@
         padding: 2px;
         margin: 5px;
       }
+
+      .bullets {
+        margin: 5px;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        height: 20px;
+        bottom: -35px;
+        text-align: center;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .bullets button {
+        display: inline-block;
+        position: relative;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+      .bullets button:after,
+      .bullets button:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 15%;
+        left: 15%;
+        width: 70%;
+        height: 70%;
+        border-radius: 50%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-transition: -webkit-transform .225s cubic-bezier(.5, .75, .5, 1.65), opacity .15s ease-out;
+        transition: transform .225s cubic-bezier(.5, .75, .5, 1.65), opacity .15s ease-out;
+      }
+      .bullets button:after {
+        opacity: 0;
+        background-color: #6a6a6a;
+      }
+      .bullets button:before {
+        background-color: #3f3f3f;
+      }
+      .bullets button:hover:before {
+        -webkit-transform: scale(0.7);
+        transform: scale(0.7);
+      }
+      .bullets .active:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      .bullets .active:before {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5);
+      }
     </style>
 
     <div style="position: relative;">
@@ -21,6 +84,11 @@
         <paper-icon-button icon="icons:chevron-right" on-tap="next" class="round"></paper-icon-button>
       </div>
       <img id="image" src="{{currentImg}}" title$="{{currentImg}}">
+      <div class="bullets" hidden="{{noBullets}}">
+        <template id="bullets" is="dom-repeat" items="{{_imgsWithClass}}">
+          <button data-index$="{{index}}" class$="{{item.class}}" on-tap="_changePos"></button>
+        </template>
+      </div>
     </div>
   </template>
 
@@ -31,13 +99,14 @@
         images: {
           type: Array,
           value: [],
-          notify: true,
+          reflectToAttribute: true,
           observer: '_onImagesChanged'
         },
         currentPos: {
           type: Number,
           value: 0,
-          readonly: true
+          readonly: true,
+          observer: '_onCurrentPosChanged'
         },
         currentImg: {
           type: String,
@@ -48,33 +117,52 @@
           type: Number,
           value: 0,
           observer: '_onMaxWidthChanged'
+        },
+        noBullets: {
+          type: Boolean,
+          value: false
+        },
+        _imgsWithClass: {
+          type: Array,
+          value: [],
+          readonly: true
         }
       },
       prev: function() {
         if (this.currentPos > 0) {
-          this.currentPos--;
+          this.currentPos = this.currentPos - 1;
         } else {
           this.currentPos = this.images.length - 1;
         }
-        this.currentImg = this.images[this.currentPos];
       },
       next: function() {
         if (this.currentPos < this.images.length - 1) {
-          this.currentPos++;
+          this.currentPos = this.currentPos + 1;
         } else {
           this.currentPos = 0;
         }
-        this.currentImg = this.images[this.currentPos];
+      },
+      _changePos: function(e) {
+        this.currentPos = e.target.getAttribute('data-index');
       },
       _onImagesChanged: function() {
         if (this.images.length == 0) {
           this.hidden = true;
         } else {
+          if (this.currentPos == 0) {
+            this._onCurrentPosChanged();
+          }
           this.currentPos = 0;
-          this.currentImg = this.images[this.currentPos];
           this.hidden = false;
           this.$.controls.hidden = this.images.length == 1;
         }
+      },
+      _onCurrentPosChanged: function() {
+        this.currentImg = this.images[this.currentPos];
+        var current = this.currentPos;
+        this._imgsWithClass = this.images.map(function(img, idx) {
+          return {image: img, class: idx == current ? 'active' : ''};
+        });
       },
       _onMaxWidthChanged: function() {
         if (this.maxWidth <= 0) {

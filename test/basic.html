@@ -61,6 +61,13 @@
       assert.equal(slider.currentImg, '../demo/1.jpg');
     });
 
+    test('hide/show bullets', function() {
+      slider.noBullets = true;
+      assert.equal(slider.$$('div.bullets').hidden, true);
+
+      slider.noBullets = false;
+      assert.equal(slider.$$('div.bullets').hidden, false);
+    })
   });
 
 </script>
