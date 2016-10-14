@@ -20,11 +20,18 @@ Example:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `images` | `Array`, Default: `[]` | Image source(s). If this is empty, the slider is hidden. |
-| `currentPos` | `Number`, Default: `0` - readonly | The index of images for the currently shown image |
-| `currentImg` | `String`, Default: `""` - readonly | Image source for the currently shown image |
-| `maxWidth` | `Number`, Default: `0` | If greater than 0, max-width for the image is set to the value. |
-| `noBullets` | `Boolean`, Default: `false` | If true, bullets below image are hidden. |
+| images* | `Array`, Default: `[]` | Image source(s). If this is empty, the slider is hidden. |
+| currentPos | `Number`, Default: `0` - readonly | The index of images for the currently shown image |
+| currentImg | `String`, Default: `""` - readonly | Image source for the currently shown image |
+| noBullets | `Boolean`, Default: `false` | If true, bullets below image are hidden. |
+
+required*
+
+#### Styling
+
+| Custom property | Description | Default |
+| --- | --- | --- |
+| `--image-slider-max-width` | Maximum width of the slider (px) | `500px` |
 
 #### Methods
 

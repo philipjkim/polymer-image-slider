@@ -7,13 +7,16 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../bower_components/polymer/polymer.html">
   <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
   <link rel="import" href="../bower_components/paper-styles/color.html">
   <link rel="import" href="../polymer-image-slider.html">
   <style is="custom-style" include="demo-pages-shared-styles">
+    .centered:not([style-scope]):not(.style-scope) {
+      max-width: 100%;
+    }
   </style>
 </head>
 <body unresolved>
@@ -23,15 +26,23 @@
   <demo-snippet>
     <template>
       <!--
+      max-width is adjustable via CSS variable `--image-slider-max-width`.
+      -->
+      <style is="custom-style">
+        :root {
+          --image-slider-max-width: 300px;
+        }
+      </style>
+
+      <!--
       Use single-quotes for `images` attribute - the value should be a valid JSON string.
 
-      <image-slider id="slider" images='["1.jpg","2.jpg"]' max-width="400"></image-slider>
+      <image-slider id="slider" images='["1.jpg","2.jpg"]'></image-slider>
       -->
-      <image-slider id="slider" images='["1.jpg","2.jpg"]' max-width="400"></image-slider>
+      <image-slider id="slider" images='["1.jpg","2.jpg"]'></image-slider>
 
       <!-- Manipulation using JS -->
       <button id="btn-change" onclick="changeImages();">Change images</button>
-      <button id="btn-resize" onclick="toggleMaxWidth();">Set/unset max width</button>
       <button id="btn-bullet" onclick="toggleBullet();">Show/hide bullets</button>
 
       <script>
@@ -44,11 +55,6 @@
           } else {
             document.querySelector('#slider').images = imageSet1;
           }
-        }
-
-        function toggleMaxWidth() {
-          var maxWidth = document.querySelector('#slider').maxWidth;
-          document.querySelector('#slider').maxWidth = maxWidth > 0 ? 0 : 400;
         }
 
         function toggleBullet() {

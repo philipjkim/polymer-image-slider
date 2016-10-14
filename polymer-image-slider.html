@@ -5,6 +5,13 @@
   <template>
 
     <style is="custom-style">
+      .outer {
+        max-width: var(--image-slider-max-width, 500px);
+      }
+      img {
+        width: 100%;
+      }
+
       paper-icon-button.round {
         background-color: var(--paper-grey-300);
         opacity: 0.3;
@@ -83,11 +90,13 @@
         <paper-icon-button icon="icons:chevron-left" on-tap="prev" class="round"></paper-icon-button>
         <paper-icon-button icon="icons:chevron-right" on-tap="next" class="round"></paper-icon-button>
       </div>
-      <img id="image" src="{{currentImg}}" title$="{{currentImg}}">
-      <div class="bullets" hidden$="{{noBullets}}">
-        <template id="bullets" is="dom-repeat" items="{{_imgsWithClass}}">
-          <button data-index$="{{index}}" class$="{{item.class}}" on-tap="_changePos"></button>
-        </template>
+      <div class="outer">
+        <img id="image" src="{{currentImg}}" title$="{{currentImg}}">
+        <div class="bullets" hidden$="{{noBullets}}">
+          <template id="bullets" is="dom-repeat" items="{{_imgsWithClass}}">
+            <button data-index$="{{index}}" class$="{{item.class}}" on-tap="_changePos"></button>
+          </template>
+        </div>
       </div>
     </div>
   </template>
@@ -112,11 +121,6 @@
           type: String,
           value: '',
           readonly: true
-        },
-        maxWidth: {
-          type: Number,
-          value: 0,
-          observer: '_onMaxWidthChanged'
         },
         noBullets: {
           type: Boolean,
@@ -163,13 +167,6 @@
         this._imgsWithClass = this.images.map(function(img, idx) {
           return {image: img, class: idx == current ? 'active' : ''};
         });
-      },
-      _onMaxWidthChanged: function() {
-        if (this.maxWidth <= 0) {
-          this.$.image.removeAttribute('style');
-        } else {
-          this.$.image.setAttribute('style', `width:100%;max-width:${this.maxWidth}px;`);
-        }
       }
     });
   </script>
