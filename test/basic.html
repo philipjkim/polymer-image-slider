@@ -29,36 +29,36 @@
       slider.images = ["../demo/1.jpg", "../demo/2.jpg", "../demo/3.jpg"];
       assert.lengthOf(slider.images, 3);
       assert.equal(slider.currentPos, 0);
-      assert.equal(slider.currentImg, '../demo/1.jpg');
+      assert.include(slider.$$('img').src, '/demo/1.jpg');
       assert.equal(slider.hidden, false);
     });
 
     test('click next button', function() {
       slider.next();
       assert.equal(slider.currentPos, 1);
-      assert.equal(slider.currentImg, '../demo/2.jpg');
+      assert.include(slider.$$('img').src, '/demo/2.jpg');
 
       slider.next();
       assert.equal(slider.currentPos, 2);
-      assert.equal(slider.currentImg, '../demo/3.jpg');
+      assert.include(slider.$$('img').src, '/demo/3.jpg');
 
       slider.next();
       assert.equal(slider.currentPos, 0);
-      assert.equal(slider.currentImg, '../demo/1.jpg');
+      assert.include(slider.$$('img').src, '/demo/1.jpg');
     });
 
     test('click prev button', function() {
       slider.prev();
       assert.equal(slider.currentPos, 2);
-      assert.equal(slider.currentImg, '../demo/3.jpg');
+      assert.include(slider.$$('img').src, '/demo/3.jpg');
 
       slider.prev();
       assert.equal(slider.currentPos, 1);
-      assert.equal(slider.currentImg, '../demo/2.jpg');
+      assert.include(slider.$$('img').src, '/demo/2.jpg');
 
       slider.prev();
       assert.equal(slider.currentPos, 0);
-      assert.equal(slider.currentImg, '../demo/1.jpg');
+      assert.include(slider.$$('img').src, '/demo/1.jpg');
     });
 
     test('hide/show bullets', function() {
