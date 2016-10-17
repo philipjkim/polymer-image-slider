@@ -91,7 +91,7 @@
         <paper-icon-button icon="icons:chevron-right" on-tap="next" class="round"></paper-icon-button>
       </div>
       <div class="outer">
-        <img id="image" src="{{_arrayItem(images.*, currentPos)}}" title$="{{_arrayItem(images.*, currentPos)}}">
+        <img id="image" src="{{_arrayItem(images.*, currentPos)}}" title$="{{_arrayItem(images.*, currentPos)}}" on-track="_handleTrack">
         <div class="bullets" hidden$="{{noBullets}}">
           <template id="bullets" is="dom-repeat" items="{{_imgsWithClass}}">
             <button data-index$="{{index}}" class$="{{item.class}}" on-tap="_changePos"></button>
@@ -139,6 +139,18 @@
           this.currentPos = this.currentPos + 1;
         } else {
           this.currentPos = 0;
+        }
+      },
+      _handleTrack: function(e) {
+        switch(e.detail.state) {
+          case 'end':
+            console.log('Tracking ended: dx: ' + e.detail.dx);
+            if (e.detail.dx > 100) {
+              this.prev();
+            } else if (e.detail.dx < -100) {
+              this.next();
+            }
+            break;
         }
       },
       _changePos: function(e) {
