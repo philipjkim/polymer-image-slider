@@ -145,7 +145,6 @@
       _handleTrack: function(e) {
         switch(e.detail.state) {
           case 'end':
-            console.log('Tracking ended: dx: ' + e.detail.dx);
             if (e.detail.dx > 100) {
               this.prev();
             } else if (e.detail.dx < -100) {
