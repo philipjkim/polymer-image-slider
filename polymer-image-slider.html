@@ -155,7 +155,7 @@
         }
       },
       _changePos: function(e) {
-        this.currentPos = e.target.getAttribute('data-index');
+        this.currentPos = Number(e.target.getAttribute('data-index'));
       },
       _arrayItem: function(change, index) {
         return change.base[index];
